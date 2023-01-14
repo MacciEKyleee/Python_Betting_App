@@ -1,0 +1,163 @@
+<h1><div class="ramka">Betting APP</div></h1>
+{% if id and username %}
+<h2>Welcome, your id: {{ id }} (<a href="/auth/logout"> log out </a>)</h2>
+{% else %}
+<h2>(<a href="/auth/login"> log in </a>)</h2>
+{% endif %}
+
+<h2>Group A:</h2>
+
+{% if id and username %}
+<table>
+
+    <tr style="background-color:#85C1E9;">
+        <th>match<br>id</th>
+        <th>match<br>start_time</th>
+        <th>home<br>team</th>
+        <th>guest<br>team</th>
+        <th>home_team <br>score</th>
+        <th>guest_team <br> score</th>
+        <th>Your type:<br> host_team</th>
+        <th>Your type:<br> guest_team</th>
+        <th>Your score:</th>
+        <th></th>
+
+    </tr >
+
+    {% for p in matches %}
+
+    <tr style="color: light brown;" align="center">
+        <td>{{ p.id }}</td>
+        <td>{{ p.date }}</td>
+        <td>{{ p.team_host }}</td>
+        <td>{{ p.team_guest }}</td>
+        <td bgcolor="#ffddee" >{{ p.home_score }}</td>
+        <td bgcolor="#ffddee">{{ p.guest_score }}</td>
+
+        <td bgcolor="khaki">
+            {% for element in results %}
+                {% if element.matches_id == p.id %}
+                    {% if element.user_id == id %}
+                        {{ element.host_goals }}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </td>
+
+        <td bgcolor="khaki">
+            {% for element in results %}
+                {% if element.matches_id == p.id %}
+                    {% if element.user_id == id %}
+                        {{ element.guest_goals }}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </td>
+
+        <td><b>
+            {% for element in results %}
+                {% if element.matches_id == p.id %}
+                    {% if element.user_id == id %}
+                        {% if element.points is defined %}
+                            {{ element.points }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </b></td>
+
+        <td>
+            <a href="/add/{{ p.id }}">Add your type</a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+    <td colspan="8" align="right"><b><a href="/score_form">Check you current total score: </a></b></td>
+    <td>{{ points }}</td>
+
+</table>
+{% endif %}
+<p >
+
+</p>
+
+<hr width="1075" align="left">
+<hr width="1075" align="left">
+
+
+{% if id and username %}
+
+<p>
+    <button type="button" ><span><a href="/delete_form">If you want to change your type - please press here.</a></span><span>&#11166;</span></button>
+</p>
+
+{% endif %}
+<hr width="1075" align="left">
+<hr width="1075" align="left">
+
+{% if id and username %}
+    {% if is_admin %}
+        <div class="card mt-2" style="max-width:330px; margin:auto; padding: 50px">
+            <button type="button" ><span><a href="/result_form"> Administrator: Add match results.</a></span><span>&#11166;</span></button>
+        </div>
+    {% endif %}
+{% endif %}
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    td, th {
+        border: 1px solid black;
+        padding: 10px;
+    }
+
+    ramka {
+        background-color: silver;
+        padding: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: gray;
+        border-radius: 5px;
+    }
+
+    button {
+              border-radius: 14px;
+              background-color: #fab6a1;
+              color: black;
+              text-align: center;
+              font-size: 10px;
+              padding: 10px 20px;
+              cursor: pointer;
+              position: relative;
+              transition: all 0.5s;
+              text-transform: uppercase;
+            }
+            .button:hover{
+                background-color: rgb(189, 0, 0);
+            }
+            .button :first-child{
+                padding-left: 10px;
+                transition: all 0.5s;
+            }
+            .button:hover :first-child{
+                padding-left: 0px;
+            }
+            .button :last-child{
+                opacity: 0;
+                transition: all 0.5s;
+                padding-left: 0px;
+            }
+            .button:hover :last-child {
+                opacity: 1;
+                padding-left: 10px;
+            }
+
+
+</style>

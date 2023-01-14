@@ -1,0 +1,41 @@
+CREATE TABLE "teams"
+(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "group_id" INTEGER,
+    "team_name" TEXT NOT NULL,
+    FOREIGN KEY ("group_id") REFERENCES "groups" ("id")
+);
+
+INSERT INTO "teams"
+VALUES (1,3,'Argentina'),
+       (2,4,'Australia'),
+       (3,6,'Belgium'),
+       (4,7,'Brazil'),
+       (5,7,'Cameroon'),
+       (6,6,'Canada'),
+       (7,5,'Costa_Rica'),
+       (8,6,'Croatia'),
+       (9,4,'Denmark'),
+       (10,1,'Ecuador'),
+       (11,2,'England'),
+       (12,4,'France'),
+       (13,5,'Germany'),
+       (14,8,'Ghana'),
+       (15,2,'Iran'),
+       (16,5,'Japan'),
+       (17,3,'Mexico'),
+       (18,6,'Morocco'),
+       (19,1,'Netherlands'),
+       (20,3,'Poland'),
+       (21,8,'Portugal'),
+       (22,1,'Qatar'),
+       (23,3,'Saudi_Arabia'),
+       (24,1,'Senegal'),
+       (25,7,'Serbia'),
+       (26,8,'South_Korea'),
+       (27,5,'Spain'),
+       (28,7,'Switzerland'),
+       (29,4,'Tunisia'),
+       (30,2,'United_States'),
+       (31,8,'Uruguay'),
+       (32,2,'Wales');

@@ -1,0 +1,64 @@
+
+<h1>User Account: <tr style="background-color:#85C1E9;"> {{ username }} </tr> </h1>
+
+{% if id and username %}
+<h2> (<a href="/auth/logout">log out</a>)</h2>
+{% else %}
+<h2>(<a href="/auth/login">log in</a>)</h2>
+{% endif %}
+<a href="/"> Link to the start page </a>
+<br><br>
+
+<hr>
+<h2>Group A:</h2>
+
+    <table>
+
+        <tr style="background-color:#85C1E9;">
+            <th>match_id</th>
+            <th>match_start_time</th>
+            <th>home_team</th>
+            <th>guest_team</th>
+            <th>result</th>
+        </tr >
+
+        {% for p in matches %}
+
+        <tr style="background-color:Beige;">
+            <td>{{ p.id }}</td>
+            <td>{{ p.date }}</td>
+            <td>{{ p.team_host }}</td>
+            <td>{{ p.team_guest }}</td>
+            <td><a href="/result_form/{{ p.id }}">Add your type</a></td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+<br>
+
+<hr width="885" align="left">
+<hr width="885" align="left">
+
+{% if id and username %}
+
+<p>
+    <a href="/delete_form">Change match result</a>
+</p>
+
+{% endif %}
+
+
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 1px solid black;
+        padding: 10px;
+    }
+
+
+</style>

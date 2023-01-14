@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<h1>Add Match Result</h1>
+<a href="/"> Link to the start page </a>
+
+<br>
+<br>
+<hr width="885" align="left">
+<hr width="885" align="left">
+
+World Cup 2022r. match no: <b> {{ match_id }} </b>
+
+{% for element in matches if element.id == match_id %}
+    <p>
+        You can bet on the outcome of the match up to the time: <b>{{ element.date }}</b>
+    </p>
+    <hr width="885" align="left">
+
+    <form method="post" action="/add_item">
+        <br>
+        <li>
+            Home team score ({{ element.team_host }}):
+            <input type="number" min="0" name="type_host">
+        </li>
+        <br>
+        <br>
+        <li>
+            Away team score ({{ element.team_guest }}):
+            <input type="number" min="0" name="type_guest">
+        </li>
+        <br>
+        <hr width="885" align="left">
+        <input type="submit">
+        <input type="hidden" name="match_id" value="{{ match_id }}">
+
+    </form>
+{% endfor %}
+
+
+<style>
+    .bordered {
+        border: 1px solid navajowhite;
+        background: floralwhite;
+        padding: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+</style>
