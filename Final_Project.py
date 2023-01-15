@@ -4,9 +4,11 @@ import sqlite3
 from flask import Flask, render_template, session, redirect
 
 from auth import auth_bp
-from db import database_bp
+from db import database_bp, score
 from forms.forms import forms_bp
 from db_utils import get_all_information_matches, get_connection, get_all_results
+from datetime import datetime
+
 
 
 app = Flask(__name__)
@@ -28,6 +30,7 @@ def index():
     matches = get_all_information_matches()
     results = get_all_results()
     username = session.get('username')
+    entry_time = str(datetime.now())
 
     conn = get_connection()
     c = conn.cursor()
@@ -35,16 +38,18 @@ def index():
     query = c.execute('SELECT * FROM "users" WHERE username = ?', (username,))
     user_data = str(query.fetchall())
 
-    query_2 = c.execute('SELECT "points" FROM "final" WHERE "user_id" = ?', (username,))
-    user_points = str(query_2.fetchall())
+    score_list = score(session.get('user_id'))
+    sum_points = sum(x['points'] for x in score_list)
 
     context = {
         'id': session.get('user_id'),
         'username': session.get('username'),
         'is_admin': session.get('is_admin'),
-        'points': user_points,
         'matches': matches,
-        'results': results
+        'results': results,
+        'points': score_list,
+        'entry_time': entry_time,
+        'sum_points': sum_points
     }
 
     return render_template('index.html', **context)
@@ -83,7 +88,8 @@ def result():
         'username': session.get('username'),
         'is_admin': user_data['is_admin'],
         'matches': matches,
-        'results': results
+        'results': results,
+        'points': score(session.get('user_id'))
     }
 
     return render_template('result.html', **context)

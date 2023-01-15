@@ -4,7 +4,7 @@
 {% else %}
 <h2>(<a href="/auth/login"> log in </a>)</h2>
 {% endif %}
-
+<br>
 <h2>Group A:</h2>
 
 {% if id and username %}
@@ -55,16 +55,12 @@
         </td>
 
         <td><b>
-            {% for element in results %}
-                {% if element.matches_id == p.id %}
-                    {% if element.user_id == id %}
-                        {% if element.points is defined %}
-                            {{ element.points }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    {% endif %}
+            {% for element in points %}
+
+                {% if element.match_id == p.id %}
+                    {{ element.points }}
                 {% endif %}
+
             {% endfor %}
         </b></td>
 
@@ -75,8 +71,8 @@
     </tr>
 
     {% endfor %}
-    <td colspan="8" align="right"><b><a href="/score_form">Check you current total score: </a></b></td>
-    <td>{{ points }}</td>
+    <td colspan="8" align="right"><b>Your current total score: </b></td>
+    <td>{{ sum_points }}</td>
 
 </table>
 {% endif %}

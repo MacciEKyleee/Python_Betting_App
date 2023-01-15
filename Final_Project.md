@@ -68,47 +68,14 @@ The program runs on the base:
 
 ## Usage
 How does one go about using it?
+- pip install -r requirments.txt
+
+
 - Step one create data with file "teams_base_create.py" from directory "00_Database"
 
 
 - Next run file "Final_Project.py"
 
-
-
-    conn = get_connection()
-    c = conn.cursor()
-
-    query = c.execute('SELECT * FROM "users" WHERE username = ?', (username,))
-    user_data = str(query.fetchall())
-
-    context = {
-        'id': session.get('user_id'),
-        'username': session.get('username'),
-        'is_admin': session.get('is_admin'),
-        'matches': matches,
-        'results': results
-    }
-
-    return render_template('index.html', **context)
-
-...
-
-    conn = get_connection()
-    c = conn.cursor()
-
-    query = c.execute('SELECT * FROM "users" WHERE username = ?', (username,))
-    user_data = query.fetchone()
-
-    context = {
-        'id': session.get('user_id'),
-        'username': session.get('username'),
-        'is_admin': user_data['is_admin'],
-        'matches': matches,
-        'match_id': indeks,
-        'results': results
-    }
-
-    return render_template('add_match_result.html', **context)
 
 ## Project Status
 Project is:  _beginning of program development_ . 

@@ -19,15 +19,6 @@ def login_required(view):
 
     return wrapped_view
 
-# def admin_required(view):
-#     @wraps(view)
-#     def wrapped_admin_view(*args, **kwargs):
-#         if session:
-#             return view(*args, **kwargs)
-#         else:
-#             return redirect(url_for('auth_endpoints.login'))
-#
-#     return wrapped_admin_view
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
