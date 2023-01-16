@@ -20,7 +20,7 @@
         <th>Your type:<br> host_team</th>
         <th>Your type:<br> guest_team</th>
         <th>Your score:</th>
-        <th></th>
+        
 
     </tr >
 
@@ -65,7 +65,11 @@
         </b></td>
 
         <td>
-            <a href="/add/{{ p.id }}">Add your type</a>
+            {% if entry_time > p.date %}
+                <b> - </b>
+            {% else %}
+                <a href="/add/{{ p.id }}">Add your type</a>
+            {% endif %}
         </td>
 
     </tr>
