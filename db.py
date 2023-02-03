@@ -113,8 +113,15 @@ def delete_result_item():
 
     return redirect('/')
 
-def calculate_score(user_id):
-    user_id = session.get('user_id')
+@login_required
+def get_administator(indeks):
+    indeks = int(indeks)
+
+    conn = get_connection()
+    c = conn.cursor()
+
+    result = c.execute('SELECT "is_admin" FROM "users" WHERE "id" = ?',(indeks,))
+    return result.fetchone()
 
 
 def score(user_id):

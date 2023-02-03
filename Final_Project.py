@@ -1,17 +1,16 @@
 import os
-import sqlite3
 
-from flask import Flask, render_template, session, redirect
+from flask import Flask, render_template, session
 
 from auth import auth_bp
-from db import database_bp, score
+from db import database_bp, score, get_administator
 from forms.forms import forms_bp
 from db_utils import get_all_information_matches, get_connection, get_all_results
 from datetime import datetime
 
 
-
 app = Flask(__name__)
+
 
 # https://flask.palletsprojects.com/en/1.1.x/config/#configuring-from-environment-variables
 SECRET_KEY = os.environ.get("SECRET_KEY")
@@ -29,22 +28,16 @@ app.register_blueprint(forms_bp)
 def index():
     matches = get_all_information_matches()
     results = get_all_results()
-    username = session.get('username')
     entry_time = str(datetime.now())
 
-    conn = get_connection()
-    c = conn.cursor()
-
-    query = c.execute('SELECT * FROM "users" WHERE username = ?', (username,))
-    user_data = str(query.fetchall())
-
     score_list = score(session.get('user_id'))
+    administrator = get_administator(session.get('user_id'))
     sum_points = sum(x['points'] for x in score_list)
 
     context = {
         'id': session.get('user_id'),
         'username': session.get('username'),
-        'is_admin': session.get('is_admin'),
+        'is_admin': administrator,
         'matches': matches,
         'results': results,
         'points': score_list,

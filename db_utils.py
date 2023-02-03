@@ -24,7 +24,7 @@ def get_all_results():
 
 
 def get_all_typed_results(indeks):
-    indeks = int(indeks)
+    indeks = (indeks)
     conn = get_connection()
     c = conn.cursor()
 

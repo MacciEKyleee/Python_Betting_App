@@ -8,7 +8,6 @@
 {% endif %}
 <a href="/"> Link to the start page </a>
 <br><br>
-<h1> {{ points }} </h1>
 <hr>
 <h2>Group A:</h2>
 
@@ -19,7 +18,7 @@
             <th>match_start_time</th>
             <th>home_team</th>
             <th>guest_team</th>
-            <th>result</th>
+            <th colspan="2" align="center">Match result</th>
         </tr >
 
         {% for p in matches %}
@@ -29,7 +28,9 @@
             <td>{{ p.date }}</td>
             <td>{{ p.team_host }}</td>
             <td>{{ p.team_guest }}</td>
-            <td><a href="/result_form/{{ p.id }}">Add your type</a></td>
+            <td><a href="/result_form/{{ p.id }}">  Add  </a></td>
+            <td><a href="/delete_form">Remove</a></td>
+
         </tr>
 
         {% endfor %}
@@ -42,9 +43,6 @@
 
 {% if id and username %}
 
-<p>
-    <a href="/delete_form">Change match result</a>
-</p>
 
 {% endif %}
 

@@ -74,6 +74,10 @@ How does one go about using it?
 - Step one create data with file "teams_base_create.py" from directory "00_Database"
 
 
+- Second you need to add an environment variables with your own secret key to your app, where 
+"Name" write "SECRET_KEY" and "Value" is your own secret password.
+
+
 - Next run file "Final_Project.py"
 
 

@@ -6,11 +6,10 @@
 {% else %}
 <h3>(<a href="/auth/login"> log in </a>)</h3>
 {% endif %}
+<br>
+<h2>Group A:</h2>
 
 {% if id and username %}
-<hr width="1075" align="left">
-<hr width="1075" align="left">
-<h2>Group A:</h2>
 <table>
 
     <tr style="background-color:#85C1E9;">
@@ -83,24 +82,20 @@
 
 </table>
 
-{% endif %}
-
-
-{% if id and username %}
-
 <p>
     <button type="button" ><span><a href="/delete_form">If you want to change your type - please press here.</a></span><span>&#11166;</span></button>
-</p>
-<hr width="1075" align="left">
-<hr width="1075" align="left">
-{% endif %}
-
-{% if id and username %}
     {% if is_admin %}
         <div class="card mt-2" style="max-width:330px; margin:auto; padding: 50px">
             <button type="button" ><span><a href="/result_form"> Administrator: Add match results.</a></span><span>&#11166;</span></button>
         </div>
     {% endif %}
+
+</p>
+
+
+
+
+
 {% endif %}
 
 

@@ -14,7 +14,7 @@ def add_form():
 @forms_bp.route('/delete_form')
 @login_required
 def delete_form():
-    return render_template('delete.html')
+    return render_template('delete_type_result.html')
 
 
 @forms_bp.route('/add_match_form')
@@ -27,10 +27,3 @@ def add_match_form():
 @login_required
 def delete_match_form():
     return render_template('delete_match_result.html')
-
-
-@forms_bp.route('/score_form')
-@login_required
-def score_form():
-    return render_template('score.html')
-
